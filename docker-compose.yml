@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: dodo
+      POSTGRES_PASSWORD: dodo123
+      POSTGRES_DB: dodo_payments
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dodo -d dodo_payments"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    command: ./server
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://dodo:dodo123@db:5432/dodo_payments
+      PSP_URL: http://mock_psp:3001
+      WEBHOOK_SECRET: supersecretkey123
+    depends_on:
+      db:
+        condition: service_healthy
+
+  mock_psp:
+    build: .
+    command: ./mock_psp
+    ports:
+      - "3001:3001"
+    environment:
+      PSP_PORT: "3001"
+
+volumes:
+  pgdata:

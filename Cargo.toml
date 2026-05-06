@@ -1,0 +1,36 @@
+[package]
+name = "dodo-payments"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "server"
+path = "src/main.rs"
+
+[[bin]]
+name = "mock_psp"
+path = "src/mock_psp.rs"
+
+[dependencies]
+axum = "0.7"
+tokio = { version = "1", features = ["full"] }
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "uuid", "chrono", "migrate"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+uuid = { version = "1", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+reqwest = { version = "0.11", features = ["json"] }
+hmac = "0.12"
+sha2 = "0.10"
+hex = "0.4"
+tower = "0.4"
+tower-http = { version = "0.5", features = ["trace"] }
+tracing = "0.1"
+tracing-subscriber = "0.3"
+dotenv = "0.15"
+anyhow = "1"
+thiserror = "1"
+rand = "0.8"
+base64 = "0.21"
+axum-extra = { version = "0.9", features = ["typed-header"] }
+headers = "0.4"

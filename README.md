@@ -6,7 +6,7 @@ A minimal Invoice & Payment Service built in Rust (Axum + PostgreSQL). Businesse
 
 ## Demo Video
 
-> https://www.loom.com/share/cc0198b8f5df4693991a2b709e330fc4 (Adjust the volume)
+> https://www.loom.com/share/cc0198b8f5df4693991a2b709e330fc4 (Adjust the volume and set speed to 1x)
 
 ---
 
